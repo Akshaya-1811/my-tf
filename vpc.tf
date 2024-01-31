@@ -103,3 +103,31 @@ resource "aws_network_acl" "myntra-web-nacl" {
     Name = "myntra-web-nacl"
   }
 }
+
+# database nacl
+resource "aws_network_acl" "myntra-db-nacl" {
+  vpc_id = aws_vpc.myntra_vpc.id
+
+
+  ingress {
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 65535
+  }
+
+  egress {
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+     cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 65535
+  }
+
+  tags = {
+    Name = "myntra-db-nacl"
+  }
+}
